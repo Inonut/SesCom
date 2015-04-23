@@ -2,5 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/Kata/Desktop/audiorecognizer-master/lib/jtransforms-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kata/Desktop/audiorecognizer-master/lib/jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kata/Desktop/audiorecognizer-master/lib/tritonus_remaining-0.3.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kata/Desktop/audiorecognizer-master/lib/mp3spi1.9.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kata/Desktop/audiorecognizer-master/lib/tritonus_share.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
