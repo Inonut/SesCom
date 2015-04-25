@@ -1,0 +1,13 @@
+package shazam.impl;
+
+import shazam.Song;
+
+public class RegisterSong implements Song{
+
+	@Override
+	public void proccessSong() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,6 @@
+package shazam;
+
+public abstract class Song {
+	
+	public void abstract proccessSong();
+}

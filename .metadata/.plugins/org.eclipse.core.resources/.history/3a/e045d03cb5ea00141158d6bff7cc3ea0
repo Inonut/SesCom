@@ -1,0 +1,6 @@
+package shazam;
+
+public interface Song {
+	
+	void proccessSong();
+}

@@ -1,0 +1,13 @@
+package shazam;
+
+import java.io.ByteArrayOutputStream;
+
+public abstract class Song {
+	
+	public abstract void proccessSong();
+	
+	public void makeHash(ByteArrayOutputStream out){
+		
+	}
+	
+}
