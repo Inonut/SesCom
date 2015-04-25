@@ -1,0 +1,7 @@
+package shazam.impl;
+
+import shazam.Song;
+
+public class RegisterSong implements Song{
+
+}
