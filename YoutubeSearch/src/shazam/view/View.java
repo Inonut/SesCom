@@ -1,10 +1,16 @@
 package shazam.view;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import vlc.Utils;
 
@@ -15,56 +21,77 @@ public class View extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel panelShazam;
-	private JPanel panelResult;
 	private JButton register;
 	private JButton stopUpload;
 	private JButton match;
 	private JButton startMic;
-	private  JFileChooser fc;
+	private JFileChooser fc;
+	private JTextArea songUploaded;
+	private JProgressBar progressBar;
 
+	public View() {
 
-	public View(){
-		
 		Utils.chargerLibrairie();
 		initGui();
-		}
-	
-	public void initGui()
-	{
-		panelShazam = new JPanel();
-		panelResult = new JPanel();
+	}
+
+	public void initGui() {
+		this.setLayout(new BorderLayout());
 		
+		progressBar = new JProgressBar();
+		progressBar.setMinimum(0);
+		progressBar.setStringPainted(true);
+		
+		panelShazam = new JPanel();
+		songUploaded = new JTextArea("Song uploaded\n\n");
+		songUploaded.setEditable(false);
+
 		register = new JButton("Register");
 		match = new JButton("Match");
-  	    stopUpload=new JButton("StopUpload");
-		startMic=new JButton("StartMic");
-		
-		fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        fc.setMultiSelectionEnabled(true);
+		stopUpload = new JButton("StopUpload");
+		startMic = new JButton("StartMic");
 
-		
+		fc = new JFileChooser();
+		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		fc.setMultiSelectionEnabled(true);
+
 		panelShazam.add(register);
 		panelShazam.add(match);
 		panelShazam.add(stopUpload);
 		panelShazam.add(startMic);
 		
-		this.add(panelShazam,BorderLayout.NORTH);
-		this.add(panelResult,BorderLayout.CENTER);
 		
+		JPanel panelUpdateEvent = new JPanel(new BorderLayout());
+		panelUpdateEvent.add(progressBar,BorderLayout.NORTH);
+		panelUpdateEvent.add(new JScrollPane(songUploaded),BorderLayout.CENTER);
+		
+
+		this.add(panelShazam, BorderLayout.NORTH);
+		this.add(panelUpdateEvent, BorderLayout.CENTER);
+
 		this.setVisible(true);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		
+
 	}
+	
+	public void setMxValProgressBar(int n){
+		progressBar.setMaximum(n);
+	}
+	
+	public void setMnValProgressBar(int n){
+		progressBar.setMinimum(n);
+	}
+	
+	public void updateProgress(){
+		progressBar.setValue(progressBar.getValue()+1);
+	}
+
 	public JPanel getPanelShazam() {
 		return panelShazam;
 	}
 
-	public JPanel getPanelResult() {
-		return panelResult;
-	}
+	
 
 	public JButton getRegister() {
 		return register;
@@ -74,8 +101,7 @@ public class View extends JFrame {
 		return match;
 	}
 
-
-   public JFileChooser getFc() {
+	public JFileChooser getFc() {
 		return fc;
 	}
 
@@ -87,4 +113,29 @@ public class View extends JFrame {
 		return startMic;
 	}
 	
+	public JTextArea getSongUploaded() {
+		return songUploaded;
+	}
+
+	public void setSongUploaded(JTextArea songUploaded) {
+		this.songUploaded = songUploaded;
+	}
+
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	public void setProgressBar(JProgressBar progressBar) {
+		this.progressBar = progressBar;
+	}
+
+	public void resetRegister(int mxValProgressBar) {
+		progressBar.setMinimum(0);
+		progressBar.setMaximum(mxValProgressBar);
+		progressBar.setValue(0);
+		
+		songUploaded.setText("");
+		
+	}
+
 }

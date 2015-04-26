@@ -13,81 +13,151 @@ import javax.swing.SwingWorker;
 
 import AudioLogic.Media;
 
-
 /**
  *
  * @author Kata
  */
 public class UploadWorker extends SwingWorker {
 
-    Boolean run;
-    JFileChooser fc;
-    View frm;
-    Media md=null;
-    
-    public UploadWorker(JFileChooser fc,View frm,Media md)
-    {
-        this.fc=fc;
-        this.frm=frm;
-        this.md=md;
-    }
-    @Override
-    protected Object doInBackground() throws Exception {
-           int a = fc.showOpenDialog(frm);
+	Boolean run;
+	JFileChooser fc;
+	View frm;
+	Media md = null;
+	boolean isWorcking;
 
-                if (a == JFileChooser.APPROVE_OPTION) {
+	public UploadWorker(JFileChooser fc, View frm, Media md) {
+		this.fc = fc;
+		this.frm = frm;
+		this.md = md;
+	}
 
-                    File[] files = fc.getSelectedFiles();
-                    for (File file : files) {
-                        Dfs(file);
-                    }
-                    md.commit();
+	@Override
+	protected Object doInBackground() throws Exception {
+		int a = fc.showOpenDialog(frm);
 
-                }
-        
-        return 0;
-    }
-    
-    public void Dfs(File dir) {
-     //   System.out.print(dir);
+		if (a == JFileChooser.APPROVE_OPTION) {
 
-        if (dir.isDirectory()) {
-            for (File listFile : dir.listFiles()) {
-                if (listFile.isDirectory()) {
-                    Dfs(listFile);
-                } else {
-                    String a = listFile.getName();
-                    if (checkExt(a, "mp3")) {
-                System.out.println(listFile.getName()+"  "+md.testPlay(listFile.toString()));
-                    }
-                }
-            }
-        } else {
-            if (checkExt(dir.getName(), "mp3")) {
-                System.out.println(dir.getName()+"  "+md.testPlay(dir.toString()));
+			File[] files = fc.getSelectedFiles();
+			
+			int mxValProgressBar = 0;
+			for (File file : files) {
+				mxValProgressBar += DfsCountItems(file);
+			}
+			System.out.println(mxValProgressBar);
+			
+			//frm.setMnValProgressBar(0);
+			//frm.setMxValProgressBar(mxValProgressBar);
+			frm.resetRegister(mxValProgressBar);
+			isWorcking = true;
 
-            }
-        }
+			for (File file : files) {
+				//new File(file.getAbsolutePath()).listFiles().length
+				if(isWorcking){
+					Dfs(file);
+				}else{
+					break;
+				}
+				
+			}
+			md.commit();
 
-    }
+		}
 
-    boolean checkExt(String name, String ext) {
-        int poz = name.length()-ext.length()-1;
-        
-        if (name.length() - poz - 1 != ext.length()) {
-            return false;
+		return 0;
+	}
+	
+	
+	public int DfsCountItems(File dir) {
+		// System.out.print(dir);
 
-        }
-        for (int k = poz + 1; k < name.length(); k++) {
-            if (ext.charAt(k - (poz + 1)) != name.charAt(k)) {
-                return false;
+		int count=0;
+		if (dir.isDirectory()) {
+			
+			for (File listFile : dir.listFiles()) {
+				
+				if (listFile.isDirectory()) {
+					count += DfsCountItems(listFile);
+				} else {
+					String a = listFile.getName();
+					if (checkExt(a, "mp3")) {
+						//frm.getSongUploaded().append(listFile.getName() + "  " + md.testPlay(listFile.toString())+"\n");
+						//frm.updateProgress();
+						//System.out.println(listFile.getName() + "  " + md.testPlay(listFile.toString()));
+						count++;
+					}
+				}
+			}
+		
+		} else {
+			if (checkExt(dir.getName(), "mp3")) {
+				//frm.getSongUploaded().append(dir.getName() + "  " + md.testPlay(dir.toString())+"\n");
+				//frm.updateProgress();
+				//System.out.println(dir.getName() + "  " + md.testPlay(dir.toString()));
+				count++;
+			}
+		}
+		return count;
 
-            }
+	}
+	
+	
 
-        }
+	public void Dfs(File dir) {
+		// System.out.print(dir);
 
-        return true;
-    }
+		if (dir.isDirectory()) {
+			for (File listFile : dir.listFiles()) {
+				if(isWorcking){
+					if (listFile.isDirectory()) {
+						Dfs(listFile);
+					} else {
+						String a = listFile.getName();
+						if (checkExt(a, "mp3")) {
+							frm.getSongUploaded().append(listFile.getName() + "  " + md.testPlay(listFile.toString())+"\n");
+							frm.updateProgress();
+							//System.out.println(listFile.getName() + "  " + md.testPlay(listFile.toString()));
+						}
+					}
+				}else{
+					break;
+				}
+				
+			}
+		} else {
+			if (checkExt(dir.getName(), "mp3")) {
+				frm.getSongUploaded().append(dir.getName() + "  " + md.testPlay(dir.toString())+"\n");
+				frm.updateProgress();
+				//System.out.println(dir.getName() + "  " + md.testPlay(dir.toString()));
 
-    
+			}
+		}
+
+	}
+
+	boolean checkExt(String name, String ext) {
+		int poz = name.length() - ext.length() - 1;
+
+		if (name.length() - poz - 1 != ext.length()) {
+			return false;
+
+		}
+		for (int k = poz + 1; k < name.length(); k++) {
+			if (ext.charAt(k - (poz + 1)) != name.charAt(k)) {
+				return false;
+
+			}
+
+		}
+
+		return true;
+	}
+
+	public boolean isWorcking() {
+		return isWorcking;
+	}
+
+	public void setWorcking(boolean isWorcking) {
+		this.isWorcking = isWorcking;
+	}
+
 }
