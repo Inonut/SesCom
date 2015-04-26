@@ -1,86 +1,90 @@
 package shazam.view;
-
 import java.awt.BorderLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import shazam.controller.Listener;
-import sun.security.util.PendingException;
 import vlc.Utils;
 
-public class View extends JFrame implements ActionListener{
+public class View extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panelShazam;
 	private JPanel panelResult;
-	private JButton register,match;
-	
+	private JButton register;
+	private JButton stopUpload;
+	private JButton match;
+	private JButton startMic;
+	private  JFileChooser fc;
+
+
 	public View(){
 		
 		Utils.chargerLibrairie();
-		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		
+		initGui();
+		}
+	
+	public void initGui()
+	{
 		panelShazam = new JPanel();
 		panelResult = new JPanel();
 		
-		
 		register = new JButton("Register");
 		match = new JButton("Match");
+  	    stopUpload=new JButton("StopUpload");
+		startMic=new JButton("StartMic");
 		
-		register.addActionListener(this);
-		match.addActionListener(this);
+		fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setMultiSelectionEnabled(true);
+
 		
 		panelShazam.add(register);
 		panelShazam.add(match);
+		panelShazam.add(stopUpload);
+		panelShazam.add(startMic);
 		
 		this.add(panelShazam,BorderLayout.NORTH);
 		this.add(panelResult,BorderLayout.CENTER);
+		
 		this.setVisible(true);
 		this.pack();
-	}
-	
-	public void showResult(JPanel panel){
-		//this.remove(this.panelResult);
-		//this.panelResult=panel;
-		//this.add(this.panelResult,BorderLayout.CENTER);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
 		
-		JFrame frame = new JFrame();
-		new Listener(frame);
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
+	}
+	public JPanel getPanelShazam() {
+		return panelShazam;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	public JPanel getPanelResult() {
+		return panelResult;
+	}
 
-		if(e.getSource()==match){
-			
-			//exemplu
-			//stringu reprezinta ce rezulta din shazam
-			Result result = new Result("Rammstein - Les Arènes de Nîmes");
-	        this.showResult(result);
-			
-			return;
-		}
-		
-		if(e.getSource()==register){
-			
-			new UploadSong();
-			
-			return;
-		}
-		
+	public JButton getRegister() {
+		return register;
+	}
+
+	public JButton getMatch() {
+		return match;
+	}
+
+
+   public JFileChooser getFc() {
+		return fc;
+	}
+
+	public JButton getStopUpload() {
+		return stopUpload;
+	}
+
+	public JButton getStartMic() {
+		return startMic;
 	}
 	
 }

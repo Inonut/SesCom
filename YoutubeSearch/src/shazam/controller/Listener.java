@@ -3,14 +3,9 @@ package shazam.controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import oracle.jrockit.jfr.JFR;
 import vlc.PlayerControlsPanel;
 
 public class Listener implements MouseListener,WindowListener {

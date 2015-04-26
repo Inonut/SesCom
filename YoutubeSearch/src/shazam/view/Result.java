@@ -1,38 +1,29 @@
 package shazam.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
-
 import shazam.YouTubeManager;
 import shazam.YouTubeVideo;
 import shazam.controller.Listener;
-import vlc.PlayerControlsPanel;
 
 public class Result extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<YouTubeVideo> videos;
-	private List<Song> list;
 	private JPanel mainList;
 
 	public Result(String arg){
@@ -141,28 +132,7 @@ public class Result extends JPanel {
 		this.videos = videos;
 	}
 	
-	private class Song{
-		private String url;
-		private Image image;
+	
 		
-		public Song(String url, Image image) {
-			super();
-			this.url = url;
-			this.image = image;
-		}
-		
-		public String getUrl() {
-			return url;
-		}
-		public void setUrl(String url) {
-			this.url = url;
-		}
-		public Image getImage() {
-			return image;
-		}
-		public void setImage(Image image) {
-			this.image = image;
-		}
-		
-	}
+	
 }

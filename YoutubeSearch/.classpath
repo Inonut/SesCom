@@ -2,12 +2,18 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/LIB/gdata/mail.jar"/>
-	<classpathentry kind="lib" path="D:/LIB/gdata/google-collect-1.0.jar"/>
-	<classpathentry kind="lib" path="D:/LIB/gdata/gdata.jar"/>
-	<classpathentry kind="lib" path="D:/LIB/jna/jna-3.2.5.jar"/>
-	<classpathentry kind="lib" path="D:/LIB/jna/jna-3.3.0-platform.jar"/>
-	<classpathentry kind="lib" path="D:/LIB/vlcj/vlcj-3.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/LIB/jmf/jmf.jar"/>
+	<classpathentry kind="lib" path="lib/gdata.jar"/>
+	<classpathentry kind="lib" path="lib/google-collect-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jmf.jar"/>
+	<classpathentry kind="lib" path="lib/jna-3.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/jna-3.3.0-platform.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/mapdb-2.0-alpha1.jar"/>
+	<classpathentry kind="lib" path="lib/jtransforms-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/mp3spi1.9.5.jar"/>
+	<classpathentry kind="lib" path="lib/tritonus_remaining-0.3.6.jar"/>
+	<classpathentry kind="lib" path="lib/tritonus_share.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

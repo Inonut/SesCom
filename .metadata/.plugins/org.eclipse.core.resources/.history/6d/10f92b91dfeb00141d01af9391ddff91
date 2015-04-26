@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package shazam.view;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import AudioLogic.Media;
+
+
+/**
+ *
+ * @author Kata
+ */
+public class ShazamFrame extends JFrame {
+
+    JButton but = new JButton();
+    JButton but2=new JButton("stop2");
+    JFileChooser fc = new JFileChooser();
+    ShazamFrame t = this;
+    public Boolean run=true;
+        UploadWorker wrk=null;
+        Media med=new Media();
+
+    public ShazamFrame() {
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        JPanel pan = new JPanel();
+        pan.add(but);
+        pan.add(but2);
+        fc.setMultiSelectionEnabled(true);
+        this.getContentPane().add(pan);
+        but.addActionListener(new StartList(wrk,fc,this));
+        but2.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                run=false;
+                if(wrk!=null)
+                wrk.cancel(true);
+               
+            }
+            
+        });
+        this.setSize(new Dimension(600, 500));
+        this.setVisible(true);
+    }
+
+ class StartList implements ActionListener
+  {
+    
+     JFileChooser fc=null;
+     ShazamFrame frm=null;
+     StartList(UploadWorker wrk,JFileChooser fc,ShazamFrame frm)
+     {
+     
+      this.fc=fc;
+      this.frm=frm;
+     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        wrk=new UploadWorker(true,fc,frm,med);
+        wrk.execute();
+    }
+      
+  }
+ 
+}

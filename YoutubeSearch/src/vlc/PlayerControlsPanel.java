@@ -13,24 +13,16 @@ import java.awt.event.MouseEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.filechooser.FileFilter;
-
 import uk.co.caprica.vlcj.binding.LibVlcConst;
-import uk.co.caprica.vlcj.filter.swing.SwingFileFilterFactory;
 import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
@@ -206,9 +198,7 @@ public class PlayerControlsPanel extends JPanel {
 		}
 		long time = mediaPlayer.getTime();
 		int position = (int) (mediaPlayer.getPosition() * 1000.0f);
-		int chapter = mediaPlayer.getChapter();
-		int chapterCount = mediaPlayer.getChapterCount();
-		updateTime(time);
+        updateTime(time);
 		updatePosition(position);
 	}
 
@@ -324,8 +314,7 @@ public class PlayerControlsPanel extends JPanel {
 		public void run() {
 			final long time = mediaPlayer.getTime();
 			final int position = (int) (mediaPlayer.getPosition() * 1000.0f);
-			final int chapter = mediaPlayer.getChapter();
-			final int chapterCount = mediaPlayer.getChapterCount();
+
 
 			// Updates to user interface components must be executed on the
 			// Event

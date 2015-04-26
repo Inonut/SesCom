@@ -3,4 +3,10 @@
 <fullyQualifiedTypeName name="shazam.Song"/>
 <fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="shazam.view.View"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="shazam.view.Result"/>
+<fullyQualifiedTypeName name="AudioLogic.Media"/>
+<fullyQualifiedTypeName name="uk.co.caprica.vlcj.binding.internal.media_duration_changed"/>
+<fullyQualifiedTypeName name="shazam.controller.Controller"/>
 </qualifiedTypeNameHistroy>

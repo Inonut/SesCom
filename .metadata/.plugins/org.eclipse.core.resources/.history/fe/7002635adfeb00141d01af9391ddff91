@@ -1,0 +1,76 @@
+package shazam.controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import AudioLogic.Media;
+import shazam.view.Result;
+import shazam.view.ShazamFrame;
+import shazam.view.UploadWorker;
+import shazam.view.View;
+import shazam.view.ShazamFrame.StartList;
+
+public class Controller {
+	View vw;
+    Controller t = this;
+    public Boolean run=true;
+        UploadWorker wrk=null;
+        Media med=new Media();
+	Controller(View vw)
+	{
+		this.vw=vw;
+	}
+	
+	
+	public void initActions()
+	{
+		
+		vw.getMatch().addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Result result = new Result("Rammstein - Les Arènes de Nîmes");
+		        showResult(result);				
+			}
+			
+		});
+		
+		
+		vw.getRegister().addActionListener(new StartList(wrk,vw.getFc(),vw));
+	}
+	
+public void showResult(JPanel panel){
+	
+		
+		JFrame frame = new JFrame();
+		new Listener(frame);
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+class StartList implements ActionListener
+{
+  
+   JFileChooser fc=null;
+   View frm=null;
+   StartList(JFileChooser fc,View frm)
+   {
+   
+    this.fc=fc;
+    this.frm=frm;
+   }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+      wrk=new UploadWorker(fc,frm,med);
+      wrk.execute();
+  }
+    
+}
+	
+}

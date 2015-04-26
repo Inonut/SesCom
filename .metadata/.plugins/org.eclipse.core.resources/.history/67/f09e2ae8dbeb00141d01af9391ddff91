@@ -1,0 +1,31 @@
+package shazam.controller;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import shazam.view.View;
+
+public class Controller {
+	View vw;
+	Controller(View vw)
+	{
+		this.vw=vw;
+	}
+	
+	public void initActions()
+	{
+		
+		
+	}
+	
+public void showResult(JPanel panel){
+	
+		
+		JFrame frame = new JFrame();
+		new Listener(frame);
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+}

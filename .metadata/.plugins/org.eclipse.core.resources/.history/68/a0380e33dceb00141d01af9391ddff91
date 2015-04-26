@@ -1,0 +1,82 @@
+package shazam.view;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import vlc.Utils;
+
+public class View extends JFrame implements ActionListener{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel panelShazam;
+	private JPanel panelResult;
+	public JPanel getPanelShazam() {
+		return panelShazam;
+	}
+
+	public JPanel getPanelResult() {
+		return panelResult;
+	}
+
+	public JButton getRegister() {
+		return register;
+	}
+
+	public JButton getMatch() {
+		return match;
+	}
+
+
+
+	private JButton register,match;
+	
+	public View(){
+		
+		Utils.chargerLibrairie();
+		initGui();
+		}
+	
+	public void initGui()
+	{
+		panelShazam = new JPanel();
+		panelResult = new JPanel();
+		
+		register = new JButton("Register");
+		match = new JButton("Match");
+		
+		panelShazam.add(register);
+		panelShazam.add(match);
+		
+		this.add(panelShazam,BorderLayout.NORTH);
+		this.add(panelResult,BorderLayout.CENTER);
+		
+		this.setVisible(true);
+		this.pack();
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		
+	}
+	
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		
+		
+		if(e.getSource()==register){
+			
+			new UploadSong();
+			
+			return;
+		}
+		
+	}
+	
+}
