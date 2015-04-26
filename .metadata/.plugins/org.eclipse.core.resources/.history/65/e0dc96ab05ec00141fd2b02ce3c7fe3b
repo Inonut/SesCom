@@ -67,36 +67,36 @@ public class UploadWorker extends SwingWorker {
 	}
 	
 	
+	
 	public int DfsCountItems(File dir) {
 		// System.out.print(dir);
 
-		int count=0;
 		if (dir.isDirectory()) {
-			
 			for (File listFile : dir.listFiles()) {
 				
 				if (listFile.isDirectory()) {
-					count += DfsCountItems(listFile);
+					return DfsCountItems(listFile);
 				} else {
 					String a = listFile.getName();
 					if (checkExt(a, "mp3")) {
 						//frm.getSongUploaded().append(listFile.getName() + "  " + md.testPlay(listFile.toString())+"\n");
 						//frm.updateProgress();
 						//System.out.println(listFile.getName() + "  " + md.testPlay(listFile.toString()));
-						count++;
+						return 1;
 					}
 				}
+				
+				
 			}
-		
 		} else {
 			if (checkExt(dir.getName(), "mp3")) {
 				//frm.getSongUploaded().append(dir.getName() + "  " + md.testPlay(dir.toString())+"\n");
 				//frm.updateProgress();
 				//System.out.println(dir.getName() + "  " + md.testPlay(dir.toString()));
-				count++;
+				return 1;
 			}
 		}
-		return count;
+		
 
 	}
 	

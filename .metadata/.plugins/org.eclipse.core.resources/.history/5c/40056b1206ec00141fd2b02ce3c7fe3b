@@ -76,7 +76,7 @@ public class UploadWorker extends SwingWorker {
 			for (File listFile : dir.listFiles()) {
 				
 				if (listFile.isDirectory()) {
-					count += DfsCountItems(listFile);
+					DfsCountItems(listFile);
 				} else {
 					String a = listFile.getName();
 					if (checkExt(a, "mp3")) {

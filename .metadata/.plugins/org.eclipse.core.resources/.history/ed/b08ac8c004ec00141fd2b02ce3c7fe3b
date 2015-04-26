@@ -129,13 +129,4 @@ public class View extends JFrame {
 		this.progressBar = progressBar;
 	}
 
-	public void resetRegister(int mxValProgressBar) {
-		progressBar.setMinimum(0);
-		progressBar.setMaximum(mxValProgressBar);
-		progressBar.setValue(0);
-		
-		songUploaded.setText("");
-		
-	}
-
 }

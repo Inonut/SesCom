@@ -33,7 +33,7 @@ public class Matcher {
 
 	Matcher() {
 
-		db = DBMaker.newFileDB(new File("db//HashMaxHeights8"))
+		db = DBMaker.newFileDB(new File("HashMaxHeights8"))
 				.closeOnJvmShutdown().make();
 		hm = db.getTreeMap("maxHeights");
 		Names = db.getTreeMap("names");

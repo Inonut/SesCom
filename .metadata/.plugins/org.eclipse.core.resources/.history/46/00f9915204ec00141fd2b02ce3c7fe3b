@@ -41,13 +41,10 @@ public class UploadWorker extends SwingWorker {
 			
 			int mxValProgressBar = 0;
 			for (File file : files) {
-				mxValProgressBar += DfsCountItems(file);
+				mxValProgressBar += new File(file.getAbsolutePath()).listFiles().length;
 			}
-			System.out.println(mxValProgressBar);
 			
-			//frm.setMnValProgressBar(0);
-			//frm.setMxValProgressBar(mxValProgressBar);
-			frm.resetRegister(mxValProgressBar);
+			frm.setMxValProgressBar(mxValProgressBar);
 			isWorcking = true;
 
 			for (File file : files) {
@@ -65,42 +62,6 @@ public class UploadWorker extends SwingWorker {
 
 		return 0;
 	}
-	
-	
-	public int DfsCountItems(File dir) {
-		// System.out.print(dir);
-
-		int count=0;
-		if (dir.isDirectory()) {
-			
-			for (File listFile : dir.listFiles()) {
-				
-				if (listFile.isDirectory()) {
-					count += DfsCountItems(listFile);
-				} else {
-					String a = listFile.getName();
-					if (checkExt(a, "mp3")) {
-						//frm.getSongUploaded().append(listFile.getName() + "  " + md.testPlay(listFile.toString())+"\n");
-						//frm.updateProgress();
-						//System.out.println(listFile.getName() + "  " + md.testPlay(listFile.toString()));
-						count++;
-					}
-				}
-			}
-		
-		} else {
-			if (checkExt(dir.getName(), "mp3")) {
-				//frm.getSongUploaded().append(dir.getName() + "  " + md.testPlay(dir.toString())+"\n");
-				//frm.updateProgress();
-				//System.out.println(dir.getName() + "  " + md.testPlay(dir.toString()));
-				count++;
-			}
-		}
-		return count;
-
-	}
-	
-	
 
 	public void Dfs(File dir) {
 		// System.out.print(dir);
