@@ -2,12 +2,14 @@ package search.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import AudioLogic.Media;
+import search.view.DisplayMusic;
 import search.view.Result;
 import search.view.UploadWorker;
 import search.view.View;
@@ -45,7 +47,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (wrk != null){
-					wrk.cancel(true);
+					//wrk.cancel(true);
 					wrk.setWorcking(false);
 				}
 
@@ -60,6 +62,25 @@ public class Controller {
 				med.startrecordMic();
 			}
 
+		});
+		
+		vw.getDisplayBut().addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DisplayMusic a=vw.getDisMusic();
+				a=new DisplayMusic();
+				new Listener(a);
+				List<String> ls=med.getMatch().getNames();
+				
+				for(String s:ls)
+				a.getTxt().setText(a.getTxt().getText()+s+"\n");
+				
+				a.getBut().setText("Number of files: "+String.valueOf(ls.size()));
+				
+				
+			}
+			
 		});
 	}
 
@@ -81,10 +102,16 @@ public class Controller {
 
 			this.fc = fc;
 			this.frm = frm;
+			
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			if(wrk != null && wrk.isWorcking()){
+				vw.getStopUpload().doClick();
+			}
+			
 			wrk = new UploadWorker(fc, frm, med);
 			wrk.execute();
 		}

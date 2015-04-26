@@ -1,0 +1,150 @@
+package shazam.view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.MatteBorder;
+
+import shazam.YouTubeManager;
+import shazam.YouTubeVideo;
+import shazam.controller.Listener;
+
+public class Result extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<YouTubeVideo> videos;
+	private JPanel mainList;
+	private JTextField strToSearch;
+
+	public Result(String arg){
+		
+		initLayout();
+		match(arg);
+		
+	}
+	
+	private void initLayout() {
+		// TODO Auto-generated method stub
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		mainList = new JPanel(new GridBagLayout());
+		strToSearch = new JTextField();
+		
+		JPanel infoPanel = new JPanel(new BorderLayout());
+		infoPanel.add(strToSearch,BorderLayout.CENTER);
+		
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        mainList.add(new JPanel(), gbc);
+        
+        add(infoPanel);
+        add(new JScrollPane(mainList));
+		
+	}
+
+	private void addResult(YouTubeVideo youtubeVideo){
+		
+		//add(new PlayerControlsPanel(url));
+		
+		JPanel panel = new JPanel();		
+        
+        JTextField jtf = new JTextField(youtubeVideo.getWebPlayerUrl());
+        jtf.setEditable(false);
+        JLabel image = makeImage(youtubeVideo.getThumbnails().get(0));
+        image.addMouseListener(new Listener(youtubeVideo.getWebPlayerUrl()));
+        
+        panel.add(image);
+        panel.add(jtf);
+        panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainList.add(panel, gbc, 0);
+
+        validate();
+        repaint();
+	}
+
+	private JLabel makeImage(String string) {
+
+		URL url = null;
+		ImageIcon image = null;
+		try {
+			url = new URL(string);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		image = new ImageIcon(url);
+		
+		JLabel panel = new JLabel();
+		panel.setIcon(image);
+		
+		return panel;
+	}
+
+	private void match(String arg) {
+
+		String clientID = "Shazam";
+        String textQuery = arg;// "Knorkator - Ich hasse Musik";
+        int maxResults = 10;
+        boolean filter = true;
+        int timeout = 2000;
+        
+        strToSearch.setText(arg);
+  
+        YouTubeManager ym = new YouTubeManager(clientID);
+  
+		try {
+			videos = ym.retrieveVideos(textQuery, maxResults, filter, timeout);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  
+        for(int i=videos.size()-1;i>=0;i--){
+            //System.out.println(youtubeVideo.getWebPlayerUrl());
+            
+            addResult(videos.get(i));
+            
+//            System.out.println("Thumbnails");
+//            for (String thumbnail : youtubeVideo.getThumbnails()) {
+//                System.out.println("\t" + thumbnail);
+//            }
+//            System.out.println(youtubeVideo.getEmbeddedWebPlayerUrl());
+//            System.out.println("************************************");
+        }
+		
+	}
+	
+	public List<YouTubeVideo> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<YouTubeVideo> videos) {
+		this.videos = videos;
+	}
+	
+	
+		
+	
+}

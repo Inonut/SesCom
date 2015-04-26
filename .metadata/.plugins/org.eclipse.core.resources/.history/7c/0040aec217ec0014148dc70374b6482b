@@ -2,12 +2,14 @@ package shazam.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import AudioLogic.Media;
+import shazam.view.DisplayMusic;
 import shazam.view.Result;
 import shazam.view.UploadWorker;
 import shazam.view.View;
@@ -60,6 +62,24 @@ public class Controller {
 				med.startrecordMic();
 			}
 
+		});
+		
+		vw.getDisplayBut().addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DisplayMusic a=vw.getDisMusic();
+				a=new DisplayMusic();
+				List<String> ls=med.getMatch().getNames();
+				
+				for(String s:ls)
+				a.getTxt().setText(a.getTxt().getText()+s+"\n");
+				
+				a.getBut().setText("Number of files: "+String.valueOf(ls.size()));
+				
+				
+			}
+			
 		});
 	}
 

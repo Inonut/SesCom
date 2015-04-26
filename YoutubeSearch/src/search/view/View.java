@@ -2,11 +2,15 @@ package search.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -28,6 +32,12 @@ public class View extends JFrame {
 	private JFileChooser fc;
 	private JTextArea songUploaded;
 	private JProgressBar progressBar;
+	private DisplayMusic DisMusic;
+	private JButton displayBut;
+	private JLabel progressLabel;
+
+
+	
 
 	public View() {
 
@@ -39,6 +49,13 @@ public class View extends JFrame {
 		this.setLayout(new BorderLayout());
 		
 		progressBar = new JProgressBar();
+		
+		progressLabel=new JLabel("Progress: ");
+	
+		
+		progressBar.setMinimumSize(new Dimension(200,20));
+		progressBar.setPreferredSize(new Dimension(200,20));
+		progressBar.setMaximumSize(new Dimension(100,40));
 		progressBar.setMinimum(0);
 		progressBar.setStringPainted(true);
 		
@@ -50,25 +67,49 @@ public class View extends JFrame {
 		match = new JButton("Match");
 		stopUpload = new JButton("StopUpload");
 		startMic = new JButton("StartMic");
+		displayBut=new JButton("Music");
 
 		fc = new JFileChooser();
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		fc.setMultiSelectionEnabled(true);
 
-		panelShazam.add(register);
-		panelShazam.add(match);
-		panelShazam.add(stopUpload);
-		panelShazam.add(startMic);
 		
 		
-		JPanel panelUpdateEvent = new JPanel(new BorderLayout());
-		panelUpdateEvent.add(progressBar,BorderLayout.NORTH);
-		panelUpdateEvent.add(new JScrollPane(songUploaded),BorderLayout.CENTER);
+		JScrollPane jsp=new JScrollPane(songUploaded);
+		jsp.setMinimumSize(new Dimension(300,400));
+		jsp.setMaximumSize(new Dimension(300,400));
+		jsp.setPreferredSize(new Dimension(300,400));
 		
+       GridBagLayout gbl=new GridBagLayout();
 
-		this.add(panelShazam, BorderLayout.NORTH);
-		this.add(panelUpdateEvent, BorderLayout.CENTER);
-
+		this.getContentPane().setLayout(gbl);
+		this.getContentPane().add(register,new GridBagConstraints(0,0,1,1,1.0,1.0,
+				                      GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		this.getContentPane().add(match,new GridBagConstraints(1,0,1,1,1.0,1.0,
+                GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		this.getContentPane().add(stopUpload,new GridBagConstraints(2,0,1,1,1.0,1.0,
+                GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		this.getContentPane().add(startMic,new GridBagConstraints(3,0,1,1,1.0,1.0,
+                GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		this.getContentPane().add(displayBut,new GridBagConstraints(4,0,1,1,1.0,1.0,
+                GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		this.getContentPane().add(progressLabel,new GridBagConstraints(0,1,1,1,1.0,1.0,
+	               GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		this.getContentPane().add(progressBar,new GridBagConstraints(1,1,3,1,1.0,1.0,
+	               GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		this.getContentPane().add(jsp,new GridBagConstraints(0,2,3,5,1.0,1.0,
+               GridBagConstraints.WEST,GridBagConstraints.NONE,new Insets(5,5,5,5),0,0));
+		
+		
+	
+		
+	
 		this.setVisible(true);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -85,6 +126,8 @@ public class View extends JFrame {
 	
 	public void updateProgress(){
 		progressBar.setValue(progressBar.getValue()+1);
+		progressLabel.setText("Progress:"+(progressBar.getValue()+1)+"\\"+progressBar.getMaximum());
+
 	}
 
 	public JPanel getPanelShazam() {
@@ -133,9 +176,17 @@ public class View extends JFrame {
 		progressBar.setMinimum(0);
 		progressBar.setMaximum(mxValProgressBar);
 		progressBar.setValue(0);
+		progressLabel.setText("Progress:"+0+"\\"+mxValProgressBar);
 		
 		songUploaded.setText("");
 		
+	}
+	public JButton getDisplayBut() {
+		return displayBut;
+	}
+
+	public DisplayMusic getDisMusic() {
+		return DisMusic;
 	}
 
 }

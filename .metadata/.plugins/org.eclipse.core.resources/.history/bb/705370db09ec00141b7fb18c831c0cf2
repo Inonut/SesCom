@@ -1,0 +1,21 @@
+package shazam.view;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+public class DisplayMusic extends JFrame {
+	JTextArea txt;
+	JPanel pan;
+	JLabel but;
+	DisplayMusic()
+	{
+		 pan=new JPanel();
+		 but=new JLabel();
+		 txt=new JTextArea();
+		
+	}
+	
+
+}
