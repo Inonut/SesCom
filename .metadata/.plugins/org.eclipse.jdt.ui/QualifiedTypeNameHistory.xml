@@ -9,4 +9,11 @@
 <fullyQualifiedTypeName name="AudioLogic.Media"/>
 <fullyQualifiedTypeName name="uk.co.caprica.vlcj.binding.internal.media_duration_changed"/>
 <fullyQualifiedTypeName name="shazam.controller.Controller"/>
+<fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+<fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<fullyQualifiedTypeName name="java.awt.Dimension"/>
+<fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
+<fullyQualifiedTypeName name="javax.swing.JProgressBar"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 </qualifiedTypeNameHistroy>

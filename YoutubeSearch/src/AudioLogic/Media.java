@@ -83,6 +83,7 @@ public class Media {
             final AudioFormat format = getAudioFormat();
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
             line = (TargetDataLine) AudioSystem.getLine(info);
+            System.out.println(format);
             line.open(format);
             line.start();
         } catch (LineUnavailableException ex) {
